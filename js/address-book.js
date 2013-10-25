@@ -16,10 +16,8 @@
 */
 
 $(function(){
-    $('.message').html('Document is ready');
 
-    var sorted = sortObjArray(employees, last);
-    render(sorted);
+    render(employees.entries);
 
 }); // document ready
 
@@ -44,22 +42,56 @@ function sortObjArray(objArray, propName) {
 } //sortObjArray()
 
 function render(entries) {
-    var temp = $(".template")
-    var addresses = $(".address-book")
+    var template = $(".template");
+    var addresses = $(".address-book");
     addresses.empty();
     $.each(entries, function() {
-        var current;
-        current = entries.clone();
-        current.find('.first').html(this.first);
-        current.find('.last').html(this.last);
-        current.find('.title').html(this.title);
-        current.find('.dept').html(this.dept);
-        current.find('.pic').attr({
-            src: this.pic,
-            alt: 'Picture of ' + this.first + this.last
-        });
-        current.removeClass("template");
-        addresses.append(current);
+        template.clone();
+        for (prop in this) {
+            if (prop === 'pic') {
+                find('.pic').attr({
+                    src: this[prop],
+                    alt: this[prop]
+                });
+            } else {
+                find('.' + prop).html(this.prop);
+            }
+
+        }
+        // current.find('.first').html(this.first);
+        // current.find('.last').html(this.last);
+        // current.find('.title').html(this.title);
+        // current.find('.dept').html(this.dept);
+        // current.find('.pic').attr({
+        //     src: this.pic,
+        //     alt: 'Picture of ' + this.first
+        // });
+        this.removeClass("template");
+        addresses.append(this);
     });
 
+
 }
+
+// function render(entries) {
+//     var temp = $(".template");
+//     var addresses = $(".address-book");
+//     var entry;
+//     var prop;
+//     addresses.empty();
+//     for (entry in entries) {
+//         current = entry.clone();
+//         current.find('.first').html(this.first);
+//         current.find('.last').html(this.last);
+//         current.find('.title').html(this.title);
+//         current.find('.dept').html(this.dept);
+//         current.find('.pic').attr({
+//             src: this.pic,
+//             alt: 'Picture of ' + this.first
+//         });
+//         current.removeClass("template");
+//         addresses.append(current);
+//     }
+
+
+// }
